@@ -14,7 +14,7 @@ const signupSchema = Joi.object({
     password: Joi.string().min(8).required(),
     confirmPassword: Joi.any().valid(Joi.ref('password')).required()
       .messages({ 'any.only': 'Password and Confirm Password do not match' }),
-    accountType: Joi.string().valid('admin').optional(),  // Example account types
+    accountType: Joi.string().valid('Admin').optional(),
   });
   
   exports.signup = async (req, res) => {
@@ -29,7 +29,7 @@ const signupSchema = Joi.object({
       }
   
 
-      const { firstName, lastName, email, password, accountType } = req.body;
+      const { firstName, lastName, email, password, confirmPassword, accountType } = req.body;
   
 
       const existingUser = await User.findOne({ email });
